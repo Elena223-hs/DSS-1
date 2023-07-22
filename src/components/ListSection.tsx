@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Recipe from '../interfaces';
 import recipeData from '../data/recipes.json';
 
+
+
 const ListSection: React.FC = () => {
     const [recipes, setRecipes] = useState<Recipe[]>(() => {
       const parsedRecipes: Recipe[] = recipeData.map((recipe) => ({

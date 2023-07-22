@@ -1,82 +1,55 @@
 import React, { useState } from 'react';
 import Recipe from '../interfaces';
 
-const DetailsSection: React.FC = () => {
-  // State to hold the current recipe being edited
-  const [currentRecipe, setCurrentRecipe] = useState<Recipe>({
-    id: 0,
-    name: '',
-    ingredients: '',
-    instructions: '',
-    cookingTime: 0,
-    publicationDate: new Date(),
-  });
+interface DetailsSectionProps {
+  selectedRecipe: Recipe | null;
+  onSave: (recipe: Recipe) => void;
+}
 
-  // Function to handle input field changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setCurrentRecipe((prevRecipe) => ({
-      ...prevRecipe,
+const DetailsSection: React.FC<DetailsSectionProps> = ({ selectedRecipe, onSave }) => {
+  const [formData, setFormData] = useState<Recipe | null>(selectedRecipe);
+
+  const handleFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData!,
       [name]: value,
     }));
   };
 
-  // Function to handle form submission (saving the recipe)
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Implement the logic to save/update the recipe
-    // You can access the currentRecipe state to get the updated recipe data
-    // Update the recipe list and/or other state as needed
-    // Reset the form fields or perform any necessary cleanup
-    setCurrentRecipe({
-      id: 0,
-      name: '',
-      ingredients: '',
-      instructions: '',
-      cookingTime: 0,
-      publicationDate: new Date(),
-    });
-  };
-
-  // Function to handle form clearing
-  const handleFormClear = () => {
-    setCurrentRecipe({
-      id: 0,
-      name: '',
-      ingredients: '',
-      instructions: '',
-      cookingTime: 0,
-      publicationDate: new Date(),
-    });
+  const handleSaveClick = () => {
+    if (formData) {
+      onSave(formData);
+    }
   };
 
   return (
-    <div className="details-section">
-      <h2>Recipe Details</h2>
-      <form onSubmit={handleFormSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" name="name" value={currentRecipe.name} onChange={handleInputChange} required />
-
-        <label htmlFor="ingredients">Ingredients:</label>
-        <textarea id="ingredients" name="ingredients" value={currentRecipe.ingredients} onChange={handleInputChange} required />
-
-        <label htmlFor="instructions">Instructions:</label>
-        <textarea id="instructions" name="instructions" value={currentRecipe.instructions} onChange={handleInputChange} required />
-
-        <label htmlFor="cookingTime">Cooking Time:</label>
+    <section className="content-details">
+      <form>
+        <label>Title:</label>
         <input
-          type="number"
-          id="cookingTime"
-          name="cookingTime"
-          value={currentRecipe.cookingTime}
-          onChange={handleInputChange}
-          required
+          type="text"
+          name="title"
+          id="field1" // Add the ID for field1
+          className="field1" // Add the field1 class
+          value={formData?.title || ''}
+          onChange={handleFormChange}
         />
-
-        <button type="submit">Save</button>
-        <button type="button" onClick={handleFormClear}>Clear</button>
+        <label>Description:</label>
+        <textarea
+          name="description"
+          value={formData?.description || ''}
+          onChange={handleFormChange}
+        />
+        {/* Add more input fields for ingredients and instructions */}
+        <button type="button" id="saveButton" onClick={handleSaveClick}>
+          Save
+        </button>
+        <button type="button" id="clearButton" onClick={() => setFormData(null)}>
+          Clear
+        </button>
       </form>
-    </div>
+    </section>
   );
 };
 

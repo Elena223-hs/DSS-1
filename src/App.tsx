@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import ListSection from './components/ListSection';
 import DetailsSection from './components/DetailsSection';
 import Footer from './components/Footer';
+import Recipe from './interfaces';
 
 
 const App: React.FC = () => {
@@ -15,7 +16,9 @@ const App: React.FC = () => {
             <ListSection />
           </div>
           <div className="col-md-6">
-            <DetailsSection />
+            <DetailsSection selectedRecipe={null} onSave={function (recipe: Recipe): void {
+              throw new Error('Function not implemented.');
+            } } />
           </div>
         </div>
       </div>
