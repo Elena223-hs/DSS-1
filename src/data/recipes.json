@@ -1,0 +1,19 @@
+[
+    {
+      "id": 1,
+      "name": "Chocolate Cake",
+      "ingredients": "Flour, sugar, cocoa powder, eggs, butter, milk",
+      "instructions": "1. Preheat oven... 2. Mix dry ingredients... 3. Beat eggs and butter... 4. Combine dry and wet ingredients... 5. Bake in the oven...",
+      "cookingTime": 60,
+      "publicationDate": "2022-01-15T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Pasta Carbonara",
+      "ingredients": "Spaghetti, bacon, eggs, Parmesan cheese, black pepper",
+      "instructions": "1. Cook pasta... 2. Fry bacon... 3. Beat eggs and cheese... 4. Combine cooked pasta, bacon, and egg mixture... 5. Serve with black pepper...",
+      "cookingTime": 30,
+      "publicationDate": "2022-03-10T00:00:00Z"
+    }
+  ]
+  
